@@ -1,0 +1,36 @@
+$desktop: 840px;
+@mixin desktop {
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
+}
+
+.navbar-brand {
+  color: white !important;
+}
+
+.navbar-toggler {
+  border: none !important;
+}
+
+.side-bar {
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  height: 20vh;
+}
+
+.front-page {
+  height: calc(100vh - 84px);
+}
+
+@include desktop {
+  .front-page {
+    display: grid !important;
+    align-content: space-evenly;
+    grid-template-columns: 1fr 2fr;
+  }
+  .side-bar {
+    height: 60vh;
+    padding-top: 2em;
+  }
+}
