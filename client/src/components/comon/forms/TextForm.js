@@ -6,7 +6,6 @@ class TextForm extends Component {
     const {
       type,
       label,
-      id,
       placeholder,
       labelFor,
       info,
@@ -15,18 +14,18 @@ class TextForm extends Component {
       onChange
     } = this.props;
     return (
-      <div className="personal-forms">
+      <div className="personal-forms" data-test="component-text-form">
         <label for={labelFor}>{label}</label>
         <input
           name={name}
           value={value}
           type={type}
-          class="form-control"
+          className="form-control"
           id={labelFor}
           placeholder={placeholder}
           onChange={onChange}
         />
-        {info && <small class="form-text text-muted">{info}</small>}
+        {info && <small data-test="info" className="form-text text-muted">{info}</small>}
       </div>
     );
   }
