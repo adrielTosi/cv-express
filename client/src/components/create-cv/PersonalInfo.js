@@ -21,7 +21,7 @@ class PersonalInfo extends Component {
   render() {
     const { cvName, address, email, website, bio } = this.state;
     return (
-      <div className="mt-3">
+      <div className="mt-3" data-test="component-personal-info">
         <h3 className="text-center">
           <i class="fas fa-user-edit" /> Personal Information
         </h3>

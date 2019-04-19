@@ -1,34 +1,34 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import TextForm from './TextForm'
+import TextArea from './TextArea'
 import { findTestAttr } from '../../../test/Utils'
 
 const commonProps = {
-  name: "name",
-  value: "value",
-  label: "label",
+  maxlength: 400,
+  label: "laber",
+  placeholder: "placeholder",
   labelFor: "labelFor",
   info: "info",
-  type: "text",
-  placeholder: "placeholder",
+  name: "name",
+  value: "",
   onChange: jest.fn()
 }
 
 const setup = (newProps) => {
-  return shallow(<TextForm {...commonProps} {...newProps} />)
+  return shallow(<TextArea {...commonProps} {...newProps} />)
 }
 
 test("renders without errors", () => {
   const wrapper = setup()
-  const TextFormComponent = findTestAttr(wrapper, 'component-text-form')
-  expect(TextFormComponent.exists()).toBe(true)
+  const TextAreaComponent = findTestAttr(wrapper, 'component-text-area')
+  expect(TextAreaComponent.exists()).toBe(true)
 })
-test("input has value(property) equals value(props)", () => {
+test("textarea has value(property) equals value(props)", () => {
   const { value } = commonProps
   const wrapper = setup()
-  const input = wrapper.find("input")
-  expect(input.props().value).toBe(value)
+  const textarea = wrapper.find("textarea")
+  expect(textarea.props().value).toBe(value)
 })
 test("renders information when info props is passed", () => {
   const wrapper = setup()
@@ -44,9 +44,9 @@ test("does not render information when info props is not passed", () => {
 test("onChange props is called when input changes", () => {
   const mockOnChange = jest.fn()
   const newProps = { onChange: mockOnChange }
-  const event = { target: { value: "change" } }
+  const event = { target: { value: "c" } }
   const wrapper = setup(newProps)
-  const input = wrapper.find("input")
-  input.simulate("change", event)
+  const textarea = wrapper.find("textarea")
+  textarea.simulate("change", event)
   expect(mockOnChange).toHaveBeenCalledWith(event)
 })
