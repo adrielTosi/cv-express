@@ -6,6 +6,7 @@ import {
   SET_INTEREST_INFO
 } from "./actionTypes";
 
+// Actions to set information on Redux
 export const setPersonalInfo = payload => {
   return {
     type: SET_PERSONAL_INFO,

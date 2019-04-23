@@ -6,7 +6,11 @@ import rootReducer from "../reducers";
 //@param   initialState: Object
 //@returns Redux Store
 export const mockStore = (initialState = {}) => {
-  return createStore(rootReducer, applyMiddleware(middlewares));
+  return createStore(
+    rootReducer,
+    initialState,
+    applyMiddleware(...middlewares)
+  );
 };
 
 //@to      Search for data-test attribute in given wrapper

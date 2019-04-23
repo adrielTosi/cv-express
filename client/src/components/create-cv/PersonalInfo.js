@@ -1,7 +1,12 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
 import TextForm from "../comon/forms/TextForm";
 import TextArea from "../comon/forms/TextArea";
-import NextButton from "../comon/buttons/NextButton"
+import NextButton from "../comon/buttons/NextButton";
+import isEmpty from "../comon/Utils/isEmpty";
+import { setPersonalInfo } from "../../actions/cvActions";
 
 export class PersonalInfo extends Component {
   constructor(props) {
@@ -15,6 +20,32 @@ export class PersonalInfo extends Component {
       website: "",
       bio: ""
     };
+  }
+
+  componentDidMount() {
+    const { personal } = this.props.personal;
+    if (!isEmpty(personal)) {
+      // Check if individual keys exists, if they dont: set empty string
+      personal.cvName = isEmpty(personal.cvName) ? "" : personal.cvName;
+      personal.firstName = isEmpty(personal.firstName)
+        ? ""
+        : personal.firstName;
+      personal.lastName = isEmpty(personal.lastName) ? "" : personal.lastName;
+      personal.address = isEmpty(personal.address) ? "" : personal.address;
+      personal.email = isEmpty(personal.email) ? "" : personal.email;
+      personal.website = isEmpty(personal.website) ? "" : personal.website;
+      personal.bio = isEmpty(personal.bio) ? "" : personal.bio;
+
+      this.setState({
+        cvName: personal.cvName,
+        firstName: personal.firstName,
+        lastName: personal.lastName,
+        address: personal.address,
+        email: personal.email,
+        website: personal.website,
+        bio: personal.bio
+      });
+    }
   }
 
   onChange = e => {
@@ -91,11 +122,22 @@ export class PersonalInfo extends Component {
             value={bio}
             onChange={this.onChange}
           />
-          <NextButton action={this.props.nextToSkills} />
+          <NextButton action={this.props.setPersonalInfo} />
         </div>
       </div>
     );
   }
 }
 
-export default PersonalInfo;
+PersonalInfo.propTypes = {
+  setPersonalInfo: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  personal: state.personal
+});
+
+export default connect(
+  mapStateToProps,
+  { setPersonalInfo }
+)(PersonalInfo);
