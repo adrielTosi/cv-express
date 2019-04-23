@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import TextForm from "../comon/forms/TextForm";
+import TextArea from "../comon/forms/TextArea";
+import NextButton from "../comon/buttons/NextButton"
 
-class PersonalInfo extends Component {
+export class PersonalInfo extends Component {
   constructor(props) {
     super(props);
     this.state = {
       cvName: "",
-      name: "",
+      firstName: "",
+      lastName: "",
       address: "",
       email: "",
       website: "",
@@ -19,7 +22,15 @@ class PersonalInfo extends Component {
   };
 
   render() {
-    const { cvName, address, email, website, bio } = this.state;
+    const {
+      cvName,
+      firstName,
+      lastName,
+      address,
+      email,
+      website,
+      bio
+    } = this.state;
     return (
       <div className="mt-3" data-test="component-personal-info">
         <h3 className="text-center">
@@ -29,18 +40,37 @@ class PersonalInfo extends Component {
           <TextForm
             label="CV Name"
             labelFor="CVName"
-            type="text"
             name="cvName"
             value={cvName}
             info="This is the name of this CV. Make it unique."
             onChange={this.onChange}
           />
           <TextForm
+            label="First Name"
+            labelFor="firstName"
+            name="firstName"
+            value={firstName}
+            onChange={this.onChange}
+          />
+          <TextForm
+            label="Last Name"
+            labelFor="lastName"
+            name="lastName"
+            value={lastName}
+            onChange={this.onChange}
+          />
+          <TextForm
             label="Address"
             labelFor="address"
-            type="text"
             name="address"
             value={address}
+            onChange={this.onChange}
+          />
+          <TextForm
+            label="Email"
+            labelFor="email"
+            name="email"
+            value={email}
             onChange={this.onChange}
           />
           <TextForm
@@ -51,15 +81,17 @@ class PersonalInfo extends Component {
             value={website}
             onChange={this.onChange}
           />
-          <TextForm
+          <TextArea
+            maxlength={300}
             label="Bio"
+            placeholder="Describe yourself in simple words"
             labelFor="bio"
-            type="bio"
-            name="bio"
+            info="Max: 300 characters"
+            name={bio}
             value={bio}
             onChange={this.onChange}
-            info="A few words about yourself. Make it small."
           />
+          <NextButton action={this.props.nextToSkills} />
         </div>
       </div>
     );

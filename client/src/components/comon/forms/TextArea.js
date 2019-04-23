@@ -15,7 +15,7 @@ class TextArea extends Component {
     } = this.props;
     return (
       <div className="personal-forms" data-test="component-text-area">
-        <label for={labelFor}>{label}</label>
+        <label htmlFor={labelFor}>{label}</label>
         <textarea
           name={name}
           value={value}
@@ -25,7 +25,11 @@ class TextArea extends Component {
           placeholder={placeholder}
           onChange={onChange}
         />
-        {info && <small data-test="info" className="form-text text-muted">{info}</small>}
+        {info && (
+          <small data-test="info" className="form-text text-muted">
+            {info}
+          </small>
+        )}
       </div>
     );
   }
