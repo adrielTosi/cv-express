@@ -12,7 +12,7 @@ const setup = (props = {}) => {
 describe("PersonalInfo with no initial state", () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = setup({ personal: {} });
+    wrapper = setup({ personal: {}, setPersonalInfo: jest.fn() });
   });
   test("renders withour errors", () => {
     const personalInfo = findTestAttr(wrapper, "component-personal-info");
@@ -35,7 +35,9 @@ describe("PersonalInfo with no initial state", () => {
 describe("personal state in redux empty", () => {
   test("forms are empty when redux state is empty", () => {
     const initialState = {};
-    const wrapper = mount(<PersonalInfo personal={initialState} />);
+    const wrapper = mount(
+      <PersonalInfo personal={initialState} setPersonalInfo={jest.fn()} />
+    );
     const nameInput = wrapper.find("input").first();
     expect(nameInput.props().value).toBe("");
     wrapper.unmount();
@@ -55,7 +57,9 @@ describe("personal state in redux with information", () => {
         bio: "I am a passionate developer."
       }
     };
-    const wrapper2 = mount(<PersonalInfo personal={personalState} />);
+    const wrapper2 = mount(
+      <PersonalInfo personal={personalState} setPersonalInfo={jest.fn()} />
+    );
     wrapper2.update();
     const nameInput = wrapper2.find("input").first();
     expect(nameInput.props().value).toBe("cv name");

@@ -65,7 +65,7 @@ export class PersonalInfo extends Component {
     return (
       <div className="mt-3" data-test="component-personal-info">
         <h3 className="text-center">
-          <i class="fas fa-user-edit" /> Personal Information
+          <i className="fas fa-user-edit" /> Personal Information
         </h3>
         <div className="personal-forms form-group">
           <TextForm
@@ -118,7 +118,7 @@ export class PersonalInfo extends Component {
             placeholder="Describe yourself in simple words"
             labelFor="bio"
             info="Max: 300 characters"
-            name={bio}
+            name="bio"
             value={bio}
             onChange={this.onChange}
           />
