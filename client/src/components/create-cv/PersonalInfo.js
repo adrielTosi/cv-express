@@ -48,6 +48,28 @@ export class PersonalInfo extends Component {
     }
   }
 
+  handleSetPersonalInfo = () => {
+    const {
+      cvName,
+      firstName,
+      lastName,
+      address,
+      email,
+      website,
+      bio
+    } = this.state;
+    const payload = {
+      cvName,
+      firstName,
+      lastName,
+      address,
+      email,
+      website,
+      bio
+    };
+    this.props.setPersonalInfo(payload);
+  };
+
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -122,7 +144,7 @@ export class PersonalInfo extends Component {
             value={bio}
             onChange={this.onChange}
           />
-          <NextButton action={this.props.setPersonalInfo} />
+          <NextButton action={this.handleSetPersonalInfo} />
         </div>
       </div>
     );
