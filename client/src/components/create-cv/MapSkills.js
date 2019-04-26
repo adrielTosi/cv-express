@@ -7,8 +7,8 @@ const MapSkills = ({ skills }) => {
       {skills.map((item, index) => (
         <li key={index}>
           <div className="skill-list-item">
-            <h3>{item.skillName}</h3>
-            <h3>{item.knowledge.join(", ")}</h3>
+            <h3>Skill: {item.skillName}</h3>
+            <h3>Knowledge: {item.knowledge.join(", ")}</h3>
           </div>
         </li>
       ))}
