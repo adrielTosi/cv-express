@@ -92,7 +92,7 @@ export class JobsInfo extends Component {
         <AddButton handleAdd={this.handleAddJob} />
         <div className="skill-list">{listContent}</div>
         <div className="navigation-buttons">
-          <BackButton route="create-cv/personal" />
+          <BackButton route="create-cv/skills" />
           <NextButton action={this.handleSetJobsInfo} />
         </div>
       </div>

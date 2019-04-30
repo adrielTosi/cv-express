@@ -5,3 +5,7 @@ export const SET_JOBS_INFO = "SET_JOBS_INFO";
 export const SET_INTEREST_INFO = "SET_INTEREST_INFO";
 
 export const NEXT_TO_SKILLS = "NEXT_TO_SKILLS";
+
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
+
+export const GET_ERRORS = "GET_ERRORS";
