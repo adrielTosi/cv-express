@@ -5,6 +5,7 @@ const passport = require("passport");
 
 //Routes
 const userRoute = require("./routes/api/user");
+const cvRoute = require("./routes/api/cv");
 
 // App init
 const app = express();
@@ -28,6 +29,9 @@ require("./config/passport")(passport);
 
 // User Routes
 app.use("/api/user", userRoute);
+
+// CV Routes
+app.use("/api/cv", cvRoute);
 
 // Start Server
 const PORT = process.env.port || 5000;

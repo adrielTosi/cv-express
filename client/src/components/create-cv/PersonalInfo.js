@@ -1,7 +1,12 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
 import TextForm from "../comon/forms/TextForm";
 import TextArea from "../comon/forms/TextArea";
-import NextButton from "../comon/buttons/NextButton"
+import NextButton from "../comon/buttons/NextButton";
+import isEmpty from "../comon/Utils/isEmpty";
+import { setPersonalInfo } from "../../actions/cvActions";
 
 export class PersonalInfo extends Component {
   constructor(props) {
@@ -16,6 +21,54 @@ export class PersonalInfo extends Component {
       bio: ""
     };
   }
+
+  componentDidMount() {
+    const { personal } = this.props.personal;
+    if (!isEmpty(personal)) {
+      // Check if individual keys exists, if they dont: set empty string
+      personal.cvName = isEmpty(personal.cvName) ? "" : personal.cvName;
+      personal.firstName = isEmpty(personal.firstName)
+        ? ""
+        : personal.firstName;
+      personal.lastName = isEmpty(personal.lastName) ? "" : personal.lastName;
+      personal.address = isEmpty(personal.address) ? "" : personal.address;
+      personal.email = isEmpty(personal.email) ? "" : personal.email;
+      personal.website = isEmpty(personal.website) ? "" : personal.website;
+      personal.bio = isEmpty(personal.bio) ? "" : personal.bio;
+
+      this.setState({
+        cvName: personal.cvName,
+        firstName: personal.firstName,
+        lastName: personal.lastName,
+        address: personal.address,
+        email: personal.email,
+        website: personal.website,
+        bio: personal.bio
+      });
+    }
+  }
+
+  handleSetPersonalInfo = () => {
+    const {
+      cvName,
+      firstName,
+      lastName,
+      address,
+      email,
+      website,
+      bio
+    } = this.state;
+    const payload = {
+      cvName,
+      firstName,
+      lastName,
+      address,
+      email,
+      website,
+      bio
+    };
+    this.props.setPersonalInfo(payload);
+  };
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -34,7 +87,7 @@ export class PersonalInfo extends Component {
     return (
       <div className="mt-3" data-test="component-personal-info">
         <h3 className="text-center">
-          <i class="fas fa-user-edit" /> Personal Information
+          <i className="fas fa-user-edit" /> Personal Information
         </h3>
         <div className="personal-forms form-group">
           <TextForm
@@ -87,15 +140,26 @@ export class PersonalInfo extends Component {
             placeholder="Describe yourself in simple words"
             labelFor="bio"
             info="Max: 300 characters"
-            name={bio}
+            name="bio"
             value={bio}
             onChange={this.onChange}
           />
-          <NextButton action={this.props.nextToSkills} />
+          <NextButton action={this.handleSetPersonalInfo} />
         </div>
       </div>
     );
   }
 }
 
-export default PersonalInfo;
+PersonalInfo.propTypes = {
+  setPersonalInfo: PropTypes.func.isRequired
+};
+
+const mapStateToProps = state => ({
+  personal: state.personal
+});
+
+export default connect(
+  mapStateToProps,
+  { setPersonalInfo }
+)(PersonalInfo);

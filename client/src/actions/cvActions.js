@@ -1,11 +1,12 @@
 import {
   SET_PERSONAL_INFO,
-  SET_SKILL_INFO,
+  SET_SKILLS_INFO,
   SET_EDUCATION_INFO,
   SET_JOB_INFO,
   SET_INTEREST_INFO
 } from "./actionTypes";
 
+// Actions to set information on Redux
 export const setPersonalInfo = payload => {
   return {
     type: SET_PERSONAL_INFO,
@@ -14,7 +15,7 @@ export const setPersonalInfo = payload => {
 };
 export const setSkillInfo = payload => {
   return {
-    type: SET_SKILL_INFO,
+    type: SET_SKILLS_INFO,
     payload
   };
 };

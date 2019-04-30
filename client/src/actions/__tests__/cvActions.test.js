@@ -7,7 +7,7 @@ import {
 } from "../cvActions";
 import {
   SET_PERSONAL_INFO,
-  SET_SKILL_INFO,
+  SET_SKILLS_INFO,
   SET_EDUCATION_INFO,
   SET_JOB_INFO,
   SET_INTEREST_INFO
@@ -22,7 +22,7 @@ test("setPersonalInfo action should have SET_PERSONAL_INFO type", () => {
 
 test("setSkillInfo action should have SET_SKILL_INFO type", () => {
   const setSkillInfoAction = setSkillInfo(payload);
-  expect(setSkillInfoAction).toEqual({ type: SET_SKILL_INFO, payload });
+  expect(setSkillInfoAction).toEqual({ type: SET_SKILLS_INFO, payload });
 });
 
 test("setEducationInfo action should have SET_EDUCATION_INFO type", () => {

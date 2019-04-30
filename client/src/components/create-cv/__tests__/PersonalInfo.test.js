@@ -1,9 +1,10 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 
 import { PersonalInfo } from "../PersonalInfo";
 import { findTestAttr } from "../../../test/Utils";
 
+//@to shallow render PersonalInfo component
 const setup = (props = {}) => {
   return shallow(<PersonalInfo {...props} />);
 };
@@ -11,7 +12,7 @@ const setup = (props = {}) => {
 describe("PersonalInfo with no initial state", () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = setup();
+    wrapper = setup({ personal: {}, setPersonalInfo: jest.fn() });
   });
   test("renders withour errors", () => {
     const personalInfo = findTestAttr(wrapper, "component-personal-info");
@@ -31,4 +32,36 @@ describe("PersonalInfo with no initial state", () => {
   });
 });
 
-describe("PersonalInfo with initial state coming from redux", () => {});
+describe("personal state in redux empty", () => {
+  test("forms are empty when redux state is empty", () => {
+    const initialState = {};
+    const wrapper = mount(
+      <PersonalInfo personal={initialState} setPersonalInfo={jest.fn()} />
+    );
+    const nameInput = wrapper.find("input").first();
+    expect(nameInput.props().value).toBe("");
+    wrapper.unmount();
+  });
+});
+
+describe("personal state in redux with information", () => {
+  test("forms are filled when redux state.personal is not empty", () => {
+    const personalState = {
+      personal: {
+        cvName: "cv name",
+        firstName: "john",
+        lastName: "doe",
+        address: "empty street, 19",
+        email: "johndow@gmail.com",
+        website: "www.johndoe.com",
+        bio: "I am a passionate developer."
+      }
+    };
+    const wrapper2 = mount(
+      <PersonalInfo personal={personalState} setPersonalInfo={jest.fn()} />
+    );
+    wrapper2.update();
+    const nameInput = wrapper2.find("input").first();
+    expect(nameInput.props().value).toBe("cv name");
+  });
+});

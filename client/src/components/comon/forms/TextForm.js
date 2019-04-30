@@ -15,7 +15,7 @@ class TextForm extends Component {
     } = this.props;
     return (
       <div className="personal-forms" data-test="component-text-form">
-        <label for={labelFor}>{label}</label>
+        <label htmlFor={labelFor}>{label}</label>
         <input
           name={name}
           value={value}
@@ -25,7 +25,11 @@ class TextForm extends Component {
           placeholder={placeholder}
           onChange={onChange}
         />
-        {info && <small data-test="info" className="form-text text-muted">{info}</small>}
+        {info && (
+          <small data-test="info" className="form-text text-muted">
+            {info}
+          </small>
+        )}
       </div>
     );
   }

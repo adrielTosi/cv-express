@@ -83,7 +83,7 @@ router.post("/login", (req, res) => {
         remember ? null : (signOptions.expiresIn = "6h");
         // JWT sign and send token
         jwt.sign(payload, privateKey, signOptions, (err, token) => {
-          res.json({ succes: true, token: "Bearer " + token });
+          res.json({ success: true, token: "Bearer " + token });
         });
       });
     }

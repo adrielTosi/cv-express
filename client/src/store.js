@@ -10,7 +10,7 @@ const store = createStore(
   rootReducer,
   initialState,
   compose(
-    applyMiddleware(...middlewares) //let me user dispatch()
+    applyMiddleware(...middlewares) //let me use dispatch()
     // window.__REDUX_DEVTOOLS_EXTENSION__ &&
     //   window.__REDUX_DEVTOOLS_EXTENSION__()
   )
